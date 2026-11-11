@@ -74,3 +74,27 @@ El esquema completo (tablas, RLS, policies) está en
 - **`paises`**: nombre, slug, bandera (emoji), descripción
 - **`platillos`**: nombre, slug, país (FK), descripción, ingredientes, tipo,
   imagen (URL pública desde Supabase Storage)
+
+## Despliegue en AWS
+
+- **URL pública:** https://main.d2g7h5vwcg4zvj.amplifyapp.com/
+- **Servicio:** AWS Amplify Hosting (Next.js SSR), región us-east-2, rama `main`.
+  Cada `git push` a `main` dispara un nuevo despliegue automático.
+- **Build:** definido en [`amplify.yml`](./amplify.yml) (Node 22, pnpm 11.25.0).
+  Equivale a `npm run build` del enunciado, pero con `pnpm run build`.
+- **Variables de entorno:** `NEXT_PUBLIC_SUPABASE_URL` y `NEXT_PUBLIC_SUPABASE_ANON_KEY`,
+  configuradas en la consola de Amplify (nunca en el repositorio). La plantilla
+  está en [`.env.example`](./.env.example).
+- **Nota:** la home (`/`) se genera en el build; si cambian los datos en Supabase,
+  hay que volver a desplegar para verlos. Las rutas `/paises/[slug]` y
+  `/platillos/[slug]` se renderizan en cada petición.
+
+### Evidencia del despliegue
+
+Panel de AWS Amplify con el build exitoso (estado: Deployed):
+
+![Amplify Deployed](./docs/amplify-deployed.png)
+
+Aplicación funcionando en la URL pública:
+
+![App en producción](./docs/app-en-produccion.png)
