@@ -53,7 +53,7 @@ página.
 
 ## Variables de entorno necesarias
 
-Copia `.env.local.example` a `.env.local` y completa con los valores de tu
+Copia `.env.example` a `.env.local` y completa con los valores de tu
 propio proyecto de Supabase (Project Settings → Data API / API Keys):
 
 ```bash
